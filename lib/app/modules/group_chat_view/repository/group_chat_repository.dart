@@ -42,7 +42,7 @@ class GroupChatRepository {
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'AuthToken': '2ec26ad9-e039-445e-915e-zACl56sr2q'
+            'AuthToken': '2ec26ad9-e039-445e-915e-a482dc6f5e3b'
           },
         ),
       );
@@ -50,6 +50,27 @@ class GroupChatRepository {
       return response.data;
     } catch (e) {
       throw Exception('An error occurred while fetching avatar: $e');
+    }
+  }
+
+  Future<dynamic> showGlobalUser(String emailId) async {
+    try {
+      final response = await _dioClient.post(
+        ApiEndPoints.showGlobalUser,
+        data: {
+          'email': emailId,
+        },
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'AuthToken': '2ec26ad9-e039-445e-915e-a482dc6f5e3b'
+          },
+        ),
+      );
+      return response.data;
+    } catch (e) {
+      throw Exception('An error occurred while fetching global user: $e');
     }
   }
 }

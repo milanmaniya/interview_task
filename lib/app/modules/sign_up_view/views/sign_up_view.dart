@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:interview_task/app/core/model/create_global_user_model.dart';
+import 'package:interview_task/app/core/utils/shared_preference.dart';
 import 'package:interview_task/app/modules/sign_up_view/controller/sign_up_controller.dart';
 import 'package:interview_task/app/modules/sign_up_view/widget/gender_field.dart';
 import 'package:interview_task/app/modules/sign_up_view/widget/single_select_drop_down.dart';
@@ -228,7 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 fixedSize: Size(screenWidth - 40, screenHeight * 0.055),
                 backgroundColor: AppColors.buttonBgColor,
               ),
-              onPressed: () {
+              onPressed: () async {
                 if (controller.globalKey.currentState!.validate()) {
                   controller.createGlobalUser(
                     CreateGlobalUserModel(
@@ -246,6 +247,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       dateOfBirth: controller.txtDob.text,
                     ),
                   );
+
+                  await SharedPreferenceService()
+                      .setEmail(controller.txtEmail.text);
                 }
               },
               child: const Text(

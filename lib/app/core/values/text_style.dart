@@ -22,7 +22,6 @@ const hintTextStyle = TextStyle(
 const textFieldStyle = TextStyle(
   color: AppColors.sevenHundredColor,
   fontWeight: FontWeight.w400,
-  fontSize: 14,
 );
 
 const chatFieldHintText = TextStyle(
