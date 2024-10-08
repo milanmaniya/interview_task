@@ -48,6 +48,8 @@ class CommonTextFormField extends StatelessWidget {
           cursorColor: AppColors.sevenHundredColor,
           style: textFieldStyle,
           decoration: InputDecoration(
+            // filled: true,
+            // fillColor: const Color(0XFFDDEFF0),
             suffixIcon: suffixIcon,
             hintText: hintText,
             hintStyle: hintTextStyle,

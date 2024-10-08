@@ -102,6 +102,7 @@ class SignUpController extends GetxController {
   String selectedCountry = '';
   String selectedState = '';
   String selectedCity = '';
+  RxBool isShowPassword = true.obs;
 
   TextEditingController txtFullName = TextEditingController();
   TextEditingController txtPhone = TextEditingController();

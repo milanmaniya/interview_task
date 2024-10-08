@@ -1,5 +1,6 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:interview_task/app/core/values/app_color.dart';
 import 'package:interview_task/app/core/values/text_style.dart';
 import 'package:interview_task/app/modules/sign_up_view/controller/sign_up_controller.dart';
 
@@ -35,12 +36,22 @@ class SingleSelectWithSearchDropDown extends StatelessWidget {
         ),
         CustomDropdown.search(
           validator: validator,
+          closeDropDownOnClearFilterSearch: true,
           decoration: const CustomDropdownDecoration(
+            listItemStyle: textFieldStyle,
             expandedBorderRadius: BorderRadius.all(
               Radius.circular(12),
             ),
             closedBorderRadius: BorderRadius.all(
               Radius.circular(12),
+            ),
+            expandedSuffixIcon: Icon(
+              Icons.keyboard_arrow_up_rounded,
+              color: AppColors.mainColor,
+            ),
+            closedSuffixIcon: Icon(
+              Icons.keyboard_arrow_down_rounded,
+              color: AppColors.mainColor,
             ),
             closedBorder: Border.symmetric(
               horizontal: BorderSide(

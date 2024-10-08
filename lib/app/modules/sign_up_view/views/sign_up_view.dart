@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:interview_task/app/core/model/create_global_user_model.dart';
 import 'package:interview_task/app/core/utils/shared_preference.dart';
 import 'package:interview_task/app/modules/sign_up_view/controller/sign_up_controller.dart';
@@ -44,6 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               style: TextStyle(
                 color: AppColors.mainColor,
                 fontSize: 40,
+                fontFamily: 'Cherry Swash',
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -52,6 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               style: TextStyle(
                 color: Color(0XFF3A4750),
                 fontSize: 16,
+                fontFamily: 'Exo',
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -104,24 +107,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(
               height: screenHeight * 0.015,
             ),
-            CommonTextFormField(
-              obscureText: true,
-              hintText: 'Please enter your password',
-              title: 'Password',
-              controller: controller.txtPassword,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a password';
-                }
+            Obx(
+              () => CommonTextFormField(
+                obscureText: controller.isShowPassword.value,
+                hintText: 'Please enter your password',
+                title: 'Password',
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    controller.isShowPassword.value =
+                        !controller.isShowPassword.value;
+                  },
+                  child: Icon(
+                    controller.isShowPassword.value
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility,
+                    color: AppColors.mainColor,
+                  ),
+                ),
+                controller: controller.txtPassword,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a password';
+                  }
 
-                final RegExp passwordRegExp = RegExp(
-                    r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}|:;<>?,.\[\]\\/-]).+$');
+                  final RegExp passwordRegExp = RegExp(
+                      r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}|:;<>?,.\[\]\\/-]).+$');
 
-                if (!passwordRegExp.hasMatch(value)) {
-                  return 'Password must contain at least one uppercase letter, one number, and one special character';
-                }
-                return null;
-              },
+                  if (!passwordRegExp.hasMatch(value)) {
+                    return 'Password must contain at least one uppercase letter, one number, and one special character';
+                  }
+                  return null;
+                },
+              ),
             ),
             SizedBox(
               height: screenHeight * 0.015,
@@ -211,10 +228,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller.txtDob.text =
                       '${date!.day}/${date.month}/${date.year}';
                 },
-                child: const Icon(
-                  Icons.calendar_month_rounded,
-                  color: AppColors.mainColor,
-                ),
+                child: Image.asset('asset/images/calender.png'),
+                // child: const Icon(
+                //   Icons.calendar_month_rounded,
+                //   color: AppColors.mainColor,
+                // ),
               ),
             ),
             SizedBox(

@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:interview_task/app/modules/splash_view/views/splash_view.dart';
+import 'package:interview_task/app/core/values/app_color.dart';
+import 'package:interview_task/app/modules/group_chat_view/views/group_chat_view.dart';
+import 'package:interview_task/app/modules/sign_up_view/views/sign_up_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,10 +28,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.mainColor),
         useMaterial3: true,
       ),
-      home: const SplashView(),
+      home: const GroupChatView(),
     );
   }
 }

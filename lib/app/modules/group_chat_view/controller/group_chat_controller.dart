@@ -1,21 +1,21 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:interview_task/app/core/model/create_global_chat_model.dart';
 import 'package:interview_task/app/core/model/recieve_messages_model.dart';
 import 'package:interview_task/app/core/model/show_global_user_model.dart';
 import 'package:interview_task/app/core/utils/shared_preference.dart';
 import 'package:interview_task/app/modules/group_chat_view/repository/group_chat_repository.dart';
+import 'package:interview_task/app/modules/group_chat_view/widgets/chat_container.dart';
+import 'package:intl/intl.dart';
 
 class GroupChatController extends GetxController {
   File? imagePath;
   final GroupChatRepository _repository = GroupChatRepository();
   TextEditingController txtSendMessage = TextEditingController();
 
-  RxList recieveChatMessagesList = [].obs;
-  RxList sendChatMessagesList = [].obs;
+  RxList messageList = [].obs;
 
   RxString userId = ''.obs;
   RxString userName = ''.obs;
@@ -37,11 +37,23 @@ class GroupChatController extends GetxController {
     try {
       final response = await _repository.recieveChatMessages();
 
-      RecieveMessagesModel recieveMessagesModel =
-          RecieveMessagesModel.fromJson(response);
+      ReceiveMessageModel recieveMessagesModel =
+          ReceiveMessageModel.fromJson(response);
 
       for (var element in recieveMessagesModel.data) {
-        recieveChatMessagesList.add(element.chatDetails.message);
+        for (var ele in element.userDetails) {
+          messageList.add(
+            ChatContainer(
+              userName: ele.name,
+              time: DateFormat.jm().format(
+                DateTime.parse(
+                  element.createdAt.toString(),
+                ),
+              ),
+              message: element.message.toString(),
+            ),
+          );
+        }
       }
     } catch (e) {
       throw Exception('Failed to create global user');
@@ -58,7 +70,12 @@ class GroupChatController extends GetxController {
         txtSendMessage.clear();
       }
 
-      sendChatMessagesList.add(createGlobalChatModel.message);
+      messageList.add(ChatContainer(
+          isSend: true,
+          userName: 'you',
+          time:
+              DateFormat.jm().format(DateTime.parse(DateTime.now().toString())),
+          message: createGlobalChatModel.message));
     } catch (e) {
       throw Exception('Failed to create global user');
     }

@@ -52,6 +52,7 @@ class _SplashViewState extends State<SplashView> {
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
+                          fontFamily: 'Open Sans',
                           fontWeight: FontWeight.w700,
                         ),
                       ),

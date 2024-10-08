@@ -9,4 +9,5 @@ abstract class AppColors {
   static const Color hintTextColor = Color(0XFFD7D7D7);
   static const Color whiteColor = Colors.white;
   static const Color chatBackgrund = Color(0XFFDDEFF0);
+  static const Color chatBackgroundColor = Color(0XffDDEFF0);
 }
