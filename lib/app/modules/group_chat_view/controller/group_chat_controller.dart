@@ -72,7 +72,7 @@ class GroupChatController extends GetxController {
 
       messageList.add(ChatContainer(
           isSend: true,
-          userName: 'you',
+          userName: 'You',
           time:
               DateFormat.jm().format(DateTime.parse(DateTime.now().toString())),
           message: createGlobalChatModel.message));

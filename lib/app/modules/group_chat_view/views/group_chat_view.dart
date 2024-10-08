@@ -1,6 +1,5 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -139,7 +138,7 @@ class _GroupChatViewState extends State<GroupChatView> {
                     children: [
                       Expanded(
                         child: SizedBox(
-                          height: 50,
+                          height: 64,
                           child: TextField(
                             style: textFieldStyle,
                             controller: controller.txtSendMessage,
@@ -195,7 +194,7 @@ class _GroupChatViewState extends State<GroupChatView> {
                       ),
                       IconButton(
                         style: IconButton.styleFrom(
-                          fixedSize: const Size(50, 50),
+                          fixedSize: const Size(55, 55),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -215,7 +214,11 @@ class _GroupChatViewState extends State<GroupChatView> {
                           );
                         },
                         icon: SvgPicture.asset(
-                            'asset/images/send_message_icon.svg'),
+                          'asset/images/send_message_icon.svg',
+                          height: 25,
+                          width: 25,
+                          fit: BoxFit.cover,
+                        ),
                         color: AppColors.whiteColor,
                       ),
                     ],

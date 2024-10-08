@@ -31,7 +31,7 @@ const textFieldStyle = TextStyle(
 const chatFieldHintText = TextStyle(
   color: AppColors.mainColor,
   fontWeight: FontWeight.w400,
-  fontSize: 14,
+  fontSize: 16,
 );
 
 const chatTextStyle = TextStyle(
